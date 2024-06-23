@@ -5,7 +5,7 @@ import Tooltip from 'antd/lib/tooltip'
 import Button from 'antd/lib/button';
 import Timeline from 'antd/lib/timeline';
 
-import { ArrowsAltOutlined, ShrinkOutlined, FieldTimeOutlined,DoubleRightOutlined,DoubleLeftOutlined,ClockCircleOutlined } from '@ant-design/icons';
+import { ArrowsAltOutlined, ShrinkOutlined, FieldTimeOutlined, DoubleRightOutlined, DoubleLeftOutlined, ClockCircleOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
 import moment, { Moment } from 'moment'
 import 'antd/es/calendar/style/css.js';
 import 'antd/es/button/style/css.js';
@@ -20,6 +20,7 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
   const [isTimelineView, setIsTimelineView] = useState<boolean>(true);
   const [isWideMode, setWideMode] = useState(false)
   const [isLeftMode, setLeftMode] = useState(true)
+  const [reverse, setReverse] = useState(false);
 
 
 
@@ -44,6 +45,11 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
   const switchLeftMode = () => {
     setLeftMode(!isLeftMode)
   }
+
+  const handleReverse = () => {
+    setReverse(!reverse);
+  };
+
 
   const dateCellRender = (date: Moment) => {
     const curDateMilestones = milestones?.filter((m) => m.date.isSame(date, 'day'))
@@ -74,7 +80,7 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
         </div>
         <div className="p-4">
           {/* <div className="flex justify-between items-center mb-4"> */}
-          <div className="absolute left-14 top-4">
+          <div className="absolute left-16 top-4">
             <Button
               shape="circle"
               icon={isTimelineView ? <FieldTimeOutlined /> : <FieldTimeOutlined />}
@@ -83,20 +89,28 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
               {/* {isTimelineView ? '返回日历视图' : '显示时间轴'} */}
             </Button>
           </div>
-          <br />
-          <div className="absolute left-24 top-4">
+
+          <div className="absolute left-28 top-4">
             <Button
               shape="circle"
               icon={isLeftMode ? <DoubleRightOutlined /> : <DoubleLeftOutlined />}
               onClick={switchLeftMode}
             >
-              {/* {isTimelineView ? '返回日历视图' : '显示时间轴'} */}
+            </Button>
+          </div>
+          <div className="absolute left-40 top-4">
+            <Button
+              shape="circle"
+              icon={reverse ? <DownOutlined /> : <UpOutlined />}
+              onClick={handleReverse}
+            >
             </Button>
           </div>
           <br />
+          <br />
           {isTimelineView ? (
-            <> 
-              <Timeline mode={isLeftMode?'left':'alternate'}>
+            <>
+              <Timeline reverse={reverse} mode={isLeftMode ? 'left' : 'alternate'}>
                 {milestones?.map((milestone, index) => (
                   <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />} label={milestone.date.format('YYYY-MM-DD')} > <div dangerouslySetInnerHTML={{ __html: milestone.content }}  ></div></Timeline.Item>
                 ))}
