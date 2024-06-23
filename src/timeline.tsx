@@ -11,7 +11,9 @@ import { getBlockContent, getMilestones } from './util';
 
 const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdate }) => {
   const [milestones, setMilestones] = useState<{ content: string, date: Moment }[]>()
-  const [isTimelineView, setIsTimelineView] = useState<boolean>(false);
+  const [isTimelineView, setIsTimelineView] = useState<boolean>(true);
+  const [isWideMode, setWideMode] = useState(false)
+
 
   useEffect(() => {
     const fetchMilestones = async () => {
@@ -41,31 +43,51 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
     })
   }
 
+  const switchWideMode = (isWidMode) => {
+    setWideMode(isWidMode)
+  }
+
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center mb-4">
-        <Button
-          shape="circle"
-          icon={isTimelineView ? <ShrinkOutlined /> : <ArrowsAltOutlined />}
-          onClick={toggleView}
-        >
-          {isTimelineView ? '返回日历视图' : '显示时间轴'}
-        </Button>
-      </div>
-      {isTimelineView ? (
-        <div className="timeline-view">
-          {milestones?.map((milestone, index) => (
-            <div key={index} className="milestone-item">
-              <div className="date">{milestone.date.format('YYYY-MM-DD')}</div>
-              <div className="content">{milestone.content}</div>
-            </div>
-          ))}
+
+    <>
+      <div className="w-screen h-screen absolute bg-transparent" onClick={() => logseq.hideMainUI()}></div>
+      <div className={`${isWideMode ? 'w-2/3' : 'w-1/3'} h-5/6 bg-white absolute top-12 right-4 shadow-lg p-1 overflow-auto rounded transition-all`}>
+        <div className="absolute left-4 top-4">
+          {
+            isWideMode
+              ? <Button shape="circle" icon={<ShrinkOutlined />} onClick={() => switchWideMode(false)}></Button>
+              : <Button shape="circle" icon={<ArrowsAltOutlined />} onClick={() => switchWideMode(true)}></Button>
+          }
         </div>
-      ) : (
-        <Calendar dateCellRender={dateCellRender} />
-      )}
-    </div>
+        <div className="p-4">
+          <div className="flex justify-between items-center mb-4">
+            <Button
+              shape="circle"
+              icon={isTimelineView ? <ShrinkOutlined /> : <ArrowsAltOutlined />}
+              onClick={toggleView}
+            >
+              {isTimelineView ? '返回日历视图' : '显示时间轴'}
+            </Button>
+          </div>
+          {isTimelineView ? (
+            <div className="timeline-view">
+              {milestones?.map((milestone, index) => (
+                <div key={index} className="milestone-item">
+                  <div className="date">{milestone.date.format('YYYY-MM-DD')}</div>
+                  <div className="content">{milestone.content}</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <Calendar dateCellRender={dateCellRender} />
+          )}
+        </div>
+      </div>
+    </>
+
+
+
   );
 };
 
