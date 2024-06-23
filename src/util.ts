@@ -2,6 +2,7 @@ import { BlockEntity } from '@logseq/libs/dist/LSPlugin.user'
 import moment, { Moment } from 'moment'
 
 import mockData from './mockData'
+import { text } from 'stream/consumers'
 
 const getDateFromText = (text: string): Moment => {
   const last = text?.match(/\[\[(.+?)\]\]/g)?.slice(-1)[0]
@@ -10,13 +11,18 @@ const getDateFromText = (text: string): Moment => {
 
 const removeDateFromText = (text: string): string => {
   const last = text?.match(/\[\[(.+?)\]\]/g)?.slice(-1)[0]
-  if (!last) return text
-  return text.replace(last, '').trim()
+  if (!last) return convertHerfData(text)
+  return convertHerfData(text.replace(last, '').trim())
+}
+
+const convertHerfData = (text: string): string => {
+  const reg = /(?<!!)\[(.*?)\]\((.*?)\)/ig
+  return '<p>'+text.replace(reg, `<a href=$2>$1</a>`)+'</p>'
 }
 
 export const getMilestones = (content: BlockEntity) => {
   const milestones = content?.children
-          ?.find(item => (item as BlockEntity )?.content === 'milestones')
+    ?.find(item => (item as BlockEntity)?.content === 'milestones')
   return (milestones as BlockEntity)?.children?.map(milestone => {
     const content = (milestone as BlockEntity)?.content
     return {

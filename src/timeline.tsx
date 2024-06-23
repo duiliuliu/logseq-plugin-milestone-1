@@ -98,7 +98,7 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
             <> 
               <Timeline mode={isLeftMode?'left':'alternate'}>
                 {milestones?.map((milestone, index) => (
-                  <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />} label={milestone.date.format('YYYY-MM-DD')}>{milestone.content}</Timeline.Item>
+                  <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />} label={milestone.date.format('YYYY-MM-DD')} > <div dangerouslySetInnerHTML={{ __html: milestone.content }}  ></div></Timeline.Item>
                 ))}
               </Timeline>
             </>
