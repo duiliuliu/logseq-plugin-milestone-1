@@ -9,6 +9,10 @@ import { ArrowsAltOutlined, ShrinkOutlined, FieldTimeOutlined,DoubleRightOutline
 import moment, { Moment } from 'moment'
 import 'antd/es/calendar/style/css.js';
 import 'antd/es/button/style/css.js';
+import 'antd/es/tooltip/style/css.js';
+import 'antd/es/timeline/style/css.js';
+
+
 import { getBlockContent, getMilestones } from './util';
 
 const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdate }) => {
@@ -37,8 +41,8 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
     setWideMode(isWidMode)
   }
 
-  const switchLeftMode = (isLeftMode) => {
-    setLeftMode(isLeftMode)
+  const switchLeftMode = () => {
+    setLeftMode(!isLeftMode)
   }
 
   const dateCellRender = (date: Moment) => {
