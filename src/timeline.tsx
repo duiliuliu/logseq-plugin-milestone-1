@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'antd/lib/calendar';
 import Tooltip from 'antd/lib/tooltip'
 import Button from 'antd/lib/button';
-import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons';
+import Timeline from 'antd/lib/timeline';
+import { ArrowsAltOutlined, ShrinkOutlined, FieldTimeOutlined } from '@ant-design/icons';
 import moment, { Moment } from 'moment'
 import 'antd/es/calendar/style/css.js';
 import 'antd/es/button/style/css.js';
@@ -61,24 +62,23 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
           }
         </div>
         <div className="p-4">
-          <div className="flex justify-between items-center mb-4">
+          {/* <div className="flex justify-between items-center mb-4"> */}
+          <div className="absolute left-14 top-4">
             <Button
               shape="circle"
-              icon={isTimelineView ? <ShrinkOutlined /> : <ArrowsAltOutlined />}
+              icon={isTimelineView ? <FieldTimeOutlined /> : <FieldTimeOutlined />}
               onClick={toggleView}
             >
-              {isTimelineView ? '返回日历视图' : '显示时间轴'}
+              {/* {isTimelineView ? '返回日历视图' : '显示时间轴'} */}
             </Button>
           </div>
+          <br/><br/>
           {isTimelineView ? (
-            <div className="timeline-view">
+            <Timeline mode="right">
               {milestones?.map((milestone, index) => (
-                <div key={index} className="milestone-item">
-                  <div className="date">{milestone.date.format('YYYY-MM-DD')}</div>
-                  <div className="content">{milestone.content}</div>
-                </div>
+                <Timeline.Item label={milestone.date.format('YYYY-MM-DD')}>{milestone.content}</Timeline.Item>
               ))}
-            </div>
+            </Timeline>
           ) : (
             <Calendar dateCellRender={dateCellRender} />
           )}
