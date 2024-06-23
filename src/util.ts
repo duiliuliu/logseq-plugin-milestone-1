@@ -16,8 +16,11 @@ const removeDateFromText = (text: string): string => {
 }
 
 const convertHerfData = (text: string): string => {
-  const reg = /(?<!!)\[(.*?)\]\((.*?)\)/ig
-  return '<p>'+text.replace(reg, `<a href=$2>$1</a>`)+'</p>'
+  const idAttriReg = /id::\s+[\w-]+/ig
+  text = text.replace(idAttriReg,'')
+
+  const hredReg = /(?<!!)\[(.*?)\]\((.*?)\)/ig
+  return '<p>'+text.replace(hredReg, `<a href=$2>$1</a>`)+'</p>'
 }
 
 export const getMilestones = (content: BlockEntity) => {
