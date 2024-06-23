@@ -4,7 +4,8 @@ import Calendar from 'antd/lib/calendar';
 import Tooltip from 'antd/lib/tooltip'
 import Button from 'antd/lib/button';
 import Timeline from 'antd/lib/timeline';
-import { ArrowsAltOutlined, ShrinkOutlined, FieldTimeOutlined } from '@ant-design/icons';
+
+import { ArrowsAltOutlined, ShrinkOutlined, FieldTimeOutlined,DoubleRightOutlined,DoubleLeftOutlined,ClockCircleOutlined } from '@ant-design/icons';
 import moment, { Moment } from 'moment'
 import 'antd/es/calendar/style/css.js';
 import 'antd/es/button/style/css.js';
@@ -14,6 +15,8 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
   const [milestones, setMilestones] = useState<{ content: string, date: Moment }[]>()
   const [isTimelineView, setIsTimelineView] = useState<boolean>(true);
   const [isWideMode, setWideMode] = useState(false)
+  const [isLeftMode, setLeftMode] = useState(true)
+
 
 
   useEffect(() => {
@@ -30,6 +33,14 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
     setIsTimelineView(!isTimelineView);
   };
 
+  const switchWideMode = (isWidMode) => {
+    setWideMode(isWidMode)
+  }
+
+  const switchLeftMode = (isLeftMode) => {
+    setLeftMode(isLeftMode)
+  }
+
   const dateCellRender = (date: Moment) => {
     const curDateMilestones = milestones?.filter((m) => m.date.isSame(date, 'day'))
     return curDateMilestones?.map((m, index) => {
@@ -42,10 +53,6 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
         </Tooltip>
       )
     })
-  }
-
-  const switchWideMode = (isWidMode) => {
-    setWideMode(isWidMode)
   }
 
 
@@ -72,13 +79,26 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
               {/* {isTimelineView ? '返回日历视图' : '显示时间轴'} */}
             </Button>
           </div>
-          <br/><br/>
+          <br />
+          <div className="absolute left-24 top-4">
+            <Button
+              shape="circle"
+              icon={isLeftMode ? <DoubleRightOutlined /> : <DoubleLeftOutlined />}
+              onClick={switchLeftMode}
+            >
+              {/* {isTimelineView ? '返回日历视图' : '显示时间轴'} */}
+            </Button>
+          </div>
+          <br />
           {isTimelineView ? (
-            <Timeline mode="right">
-              {milestones?.map((milestone, index) => (
-                <Timeline.Item label={milestone.date.format('YYYY-MM-DD')}>{milestone.content}</Timeline.Item>
-              ))}
-            </Timeline>
+            <> 
+              <Timeline mode={isLeftMode?'left':'alternate'}>
+                {milestones?.map((milestone, index) => (
+                  <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />} label={milestone.date.format('YYYY-MM-DD')}>{milestone.content}</Timeline.Item>
+                ))}
+              </Timeline>
+            </>
+
           ) : (
             <Calendar dateCellRender={dateCellRender} />
           )}
