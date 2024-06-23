@@ -8,3 +8,42 @@ html, body {
 #root {
   @apply w-screen h-screen;
 }
+
+
+/* 时间线 */
+
+/* index.css */
+
+/* ...已有的Tailwind指令 */
+
+/* 时间轴特定的样式 */
+.timeline-view {
+  @apply mt-4 p-2 bg-white rounded-lg shadow;
+}
+
+.milestone-item {
+  @apply flex justify-between items-center mb-2;
+}
+
+.milestone-item .date {
+  @apply font-bold text-lg;
+}
+
+.milestone-item .content {
+  @apply text-gray-700;
+}
+
+/* 按钮的样式 */
+.toggle-timeline-button {
+  @apply mt-2 p-2 bg-blue-500 text-white rounded-lg shadow;
+}
+
+/* 鼠标悬浮时的样式 */
+.milestone-item:hover {
+  @apply bg-gray-100;
+}
+
+/* 已过去的里程碑样式 */
+.past-milestone {
+  @apply opacity-50;
+}

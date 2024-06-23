@@ -2,7 +2,9 @@ import "@logseq/libs"
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import App from './App'
+import App from './timeline'
+import TimelinePlugin from './timeline'
+
 
 const isDevelopment = import.meta.env.DEV
 const PREFIX = "milestone"
