@@ -58,7 +58,7 @@ const App: React.FC<{ uuid: string; forceUpdate: number }> = ({ uuid, forceUpdat
       return (
         <Tooltip title={m.content} arrowPointAtCenter>
           <div className={`whitespace-nowrap bg-blue-200 rounded-sm mb-1 ${isBefore ? 'opacity-50' : ''}`} key={m.date.valueOf() + index}>
-            {m.content}
+            <div dangerouslySetInnerHTML={{ __html: m.content }}  ></div>
           </div>
         </Tooltip>
       )
