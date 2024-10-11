@@ -1,9 +1,9 @@
 {
-  "name": "logseq-plugin-milestone",
+  "name": "logseq-plugin-milestones-pro",
   "version": "1.0.0",
   "main": "dist/index.html",
   "logseq": {
-    "id": "logseq-plugin-milestone",
+    "id": "logseq-plugin-milestones-pro",
     "icon": "logo.png"
   },
   "scripts": {

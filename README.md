@@ -12,8 +12,11 @@ English | [简体中文](./README-zh_CN.md)
 ## Usage
 1. Install plugin
 2. Fill in the plugin configuration, **must fill in `dateFormatter`**
-3. Input `/` command, select `milestone`
-4. In milestones' sub-nodes, input time node
+3. Input `/` command, select `milestone` \ `milestones-page` \ `milestones-all`
+4. milestone: Enter time nodes as sub-items within the "milestones" section.
+5. milestones-page: Pull information from various journals on the page to serve as milestones.
+6. milestones-all: Integrate steps 4 and 5 to create a comprehensive overview of milestones.
+
 
 ## Plugin configuration
 - dateFormatter: Refer to [moment](https://momentjs.com/docs/#/displaying/) fill in time format string, must match your notes' time format
