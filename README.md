@@ -8,6 +8,10 @@ English | [简体中文](./README-zh_CN.md)
 
 ## Demo
 ![demo](./demo.gif)
+![demo1](/images/image.png)
+![demo1](/images/image%20copy.png)
+![demo1](/images/image%20copy%202.png)
+
 
 ## Usage
 1. Install plugin
