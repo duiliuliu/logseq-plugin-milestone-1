@@ -1,5 +1,5 @@
-# logseq-plugin-milestone
-> show milestone in calendar
+# logseq-plugin-milestone-pro
+> show milestone in calendar; fork from [logseq-plugin-milestone](https://github.com/haydenull/logseq-plugin-milestone)
 
 [![latest release version](https://img.shields.io/github/v/release/haydenull/logseq-plugin-milestone)](https://github.com/haydenull/logseq-plugin-milestone/releases)
 [![License](https://img.shields.io/github/license/haydenull/logseq-plugin-milestone?color=blue)](https://github.com/haydenull/logseq-plugin-markdown-table/blob/main/LICENSE)
