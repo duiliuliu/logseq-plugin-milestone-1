@@ -1,5 +1,5 @@
-# logseq-plugin-milestone
-> 在日历中显示时间节点
+# logseq-plugin-milestone-pro
+> 在日历中显示时间节点,fork from [logseq-plugin-milestone](https://github.com/haydenull/logseq-plugin-milestone)
 
 简体中文 | [English](./README.md)
 - ## 示例 
