@@ -12,6 +12,8 @@ const getDateFromText = (text: string): Moment => {
 const removeDateFromText = (text: string, page?: string): string => {
   page && (text = text.replace(`#${page}`, ''))
   page && (text = text.replace(`[[${page}]]`, ''))
+  text = text.split('\n')[0]
+  text = text.split('\n')[0]
 
   const last = text?.match(/\[\[(.+?)\]\]/g)?.slice(-1)[0]
   if (!last) return convertHerfData(text)
